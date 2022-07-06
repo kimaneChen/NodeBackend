@@ -4,3 +4,6 @@ build
 
 # Dependency directories
 node_modules/
+
+# Current config is not sending to  
+config/
