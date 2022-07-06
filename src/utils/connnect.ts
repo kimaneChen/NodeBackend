@@ -10,7 +10,7 @@ async function connect(){
     log.info('database is connected');
   }catch(err){
     log.error('Cannot connect to Db');
-    // process.exit(1)
+    process.exit(1)
   }
 }
 
