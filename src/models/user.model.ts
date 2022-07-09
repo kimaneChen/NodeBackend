@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
   timestamps: true
 });
 
-userSchema.pre('save', async function(next: mongoose.HookNextFunction){
+userSchema.pre('save', async function(next: any){  // mongoose.HookNextFunction is not in mongoose, this function need to be check
   let user = this as unknown as UserDocument;
 
   if(!user.isModified('password')){
