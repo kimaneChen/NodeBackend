@@ -9,6 +9,7 @@ export interface UserDocument extends mongoose.Document {
   password: string;
   createdAt: Date;
   updateAt: Date;
+  comparePassword: (candidatePassword: string): Promise<boolean>; // The return value is one Promise<boolean>
 }
 
 const userSchema = new mongoose.Schema({
@@ -34,6 +35,13 @@ userSchema.pre('save', async function(next: any){  // mongoose.HookNextFunction 
 
   return next();
 })
+
+userSchema.methods.comparePassword = async (candidatePassword: string)=>{
+  
+  const user = this as unknown as UserDocument;
+  
+  return bcrypt.compare(candidatePassword, user.password).catch((e)=>false);
+}
 
 const User = mongoose.model('User', userSchema);
 
